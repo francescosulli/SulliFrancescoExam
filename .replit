@@ -1,3 +1,7 @@
 modules = ["python-3.11"]
+run = "/bin/bash/"
 [nix]
 channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "/bin/bash/"]
