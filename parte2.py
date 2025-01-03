@@ -16,18 +16,7 @@ def kullback_leibler_divergence(p, q, epsilon=1e-10):
 def calculate_metrics(dn_dlnM_observed, hmf_theoretical, sigma_observed):
     # Calcolare la Divergenza di Kullback-Leibler (con regolarizzazione per evitare zero)
     kl_divergence = kullback_leibler_divergence(dn_dlnM_observed, hmf_theoretical)
-
-    # Calcolo della chi-quadro ridotto
-    valid_bins = sigma_observed > 0  # Trova bin con deviazione standard positiva
-    if np.any(valid_bins):  # Se ci sono bin validi
-        chi_squared = np.sum(((dn_dlnM_observed[valid_bins] - hmf_theoretical[valid_bins]) / sigma_observed[valid_bins]) ** 2)
-        dof = np.sum(valid_bins) - 1  # Gradi di libertà (numero di bin validi - 1)
-        chi_squared_reduced = chi_squared / dof if dof > 0 else np.nan
-    else:
-        chi_squared_reduced = np.nan
-
-    # Restituire le metriche calcolate
-    return kl_divergence, chi_squared_reduced
+    return kl_divergence
 
 # Configurazione della cosmologia
 params = {
@@ -78,11 +67,10 @@ for z_bin in bins:
 
     # Calcolo delle metriche
     sigma_observed = np.sqrt(hist) / (volume * dlnM)
-    kl_divergence, chi_squared_reduced = calculate_metrics(dn_dlnM_observed, hmf_theoretical, sigma_observed)
+    kl_divergence = calculate_metrics(dn_dlnM_observed, hmf_theoretical, sigma_observed)
 
     # Stampa dei risultati
     print(f"Redshift {z_bin} - Kullback-Leibler Divergence: {kl_divergence:.4e}")
-    print(f"Redshift {z_bin} - Chi-quadro ridotto: {chi_squared_reduced:.2f}")
 
     # Test di Kolmogorov-Smirnov (K-S)
     ks_stat, ks_p_value = stats.ks_2samp(dn_dlnM_observed, hmf_theoretical)
