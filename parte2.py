@@ -83,8 +83,8 @@ for z_bin in bins:
     ax[0].plot(bin_centers, dn_dlnM_observed, label='Osservato', color='blue', marker='o', linestyle='')
     ax[0].plot(bin_centers, hmf_theoretical, label='Teorico', color='red', linestyle='--')
     ax[0].set_title(f"Halo Mass Function (HMF) - Redshift {z_bin}")
-    ax[0].set_xlabel("Log10(Massa) [M$_\odot$]")
-    ax[0].set_ylabel("dN/dlnM [h$^3$ Mpc$^{-3}$]")
+    ax[0].set_xlabel(r"Log10(Massa) [M$_\odot$]")
+    ax[0].set_ylabel(r"dN/dlnM [h$^3$ Mpc$^{-3}$]")
     ax[0].legend()
     ax[0].grid(True, linestyle='--', alpha=0.5)
 
@@ -93,7 +93,7 @@ for z_bin in bins:
     ax[1].plot(bin_centers, difference, label='Differenza (Osservato - Teorico)', color='green', marker='o', linestyle='')
     ax[1].axhline(0, color='black', linestyle='--')  # Linea orizzontale a y = 0
     ax[1].set_title(f"Differenza tra Osservato e Teorico - Redshift {z_bin}")
-    ax[1].set_xlabel("Log10(Massa) [M$_\odot$]")
+    ax[1].set_xlabel(r"Log10(Massa) [M$_\odot$]")
     ax[1].set_ylabel("Differenza")
     ax[1].legend()
     ax[1].grid(True, linestyle='--', alpha=0.5)
@@ -109,7 +109,7 @@ for z_bin in bins:
     plt.errorbar(bin_centers, ratio, yerr=sigma_ratio, fmt='o', color='black', label='Rapporto Osservato/Teorico')
     plt.axhline(1, color='red', linestyle='--', label='Valore atteso = 1')
     plt.title(f"Confronto dati vs teoria - Redshift {z_bin}")
-    plt.xlabel("Log10(Massa) [M$_\odot$]")
+    plt.xlabel(r"Log10(Massa) [M$_\odot$]")
     plt.ylabel("Rapporto Osservato/Teorico")
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.5)
